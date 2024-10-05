@@ -1,0 +1,65 @@
+---
+const response = await fetch('http://localhost:3000/getTopics');
+const topics = await response.json();
+---
+
+
+
+
+
+<script>
+function renderTopics(topics) {
+  let html = '';
+  for (let topic of topics) {
+    html += `
+      <li class="mb-4">
+        <button 
+          class="w-full text-left px-4 py-2 bg-gradient-to-r from-blue-300 to-blue-600 hover:from-blue-600 hover:to-blue-900 rounded-lg"
+          onclick="toggleDropdown('${topic._id}')"
+        >
+          ${topic.name}
+        </button>
+        <ul id="dropdown-${topic._id}" class="ml-6 mt-2 hidden">
+          ${renderChildren(topic.child)}
+        </ul>
+      </li>
+    `;
+    
+  }
+  return html;
+}
+
+// Function to render the child subtopics
+function renderChildren(children) {
+  let html = '';
+  if (children && children.length > 0) {
+    for (let child of children) {
+      html += `
+        <li class="mb-2">
+          <button 
+            class="w-full text-left px-3 py-1 bg-gradient-to-r from-blue-200 to-blue-400 hover:from-blue-400 hover:to-blue-600 rounded-lg"
+            onclick="toggleDropdown('${child._id}')"
+          >
+            ${child.name}
+          </button>
+          <ul id="dropdown-${child._id}" class="ml-6 mt-2 hidden">
+            ${renderChildren(child.child)}
+          </ul>
+        </li>
+      `;
+    }
+  }
+  return html;
+}
+</script>
+
+
+<aside class="rounded-3xl h-full p-4 m-4 min-w-3/7 border min-h-[calc(100% - 10vh)] bg-gradient-to-r from-blue-500 to-blue-800 text-white">
+  <ul id="topics-container" class="list-none">
+    <div></div>
+    
+  </ul>
+</aside>
+
+<script>
+  // Function to toggle visibility of dro

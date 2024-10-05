@@ -1,10 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Bg.astro";
+import Main from "../components/Main.astro";
+import Aside from "../components/Aside.astro";
 ---
 
 <Layout title="Welcome to Astro.">
-  <main>
-    <section class="text-white text-9xl font-sans"></section>
+  <main class="flex w-screen h-[calc(100vh-10vh)] text-white">
+    <Aside />
+    <Main />
   </main>
 </Layout>

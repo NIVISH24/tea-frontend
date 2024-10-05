@@ -5,6 +5,7 @@ interface Props {
 
 const { title } = Astro.props;
 import Bg from "../components/Bg.astro";
+import Header from "../components/Header.astro";
 ---
 
 <!doctype html>
@@ -23,15 +24,14 @@ import Bg from "../components/Bg.astro";
   </head>
   <body>
     <Bg />
+    <Header />
     <div id="splashscreen" class="bg-blue-950">
-      <div class="splash-content text-white font-sans ">
+      <div class="splash-content text-white font-sans">
         <h1 class="text-9xl tracking-[1.4rem] font-bold">.TEA</h1>
         <p class="text-3xl font-light">Your Personalised learning brew</p>
       </div>
     </div>
     <slot />
-    
-    
   </body>
 </html>
 <style is:global>
